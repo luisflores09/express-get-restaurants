@@ -16,4 +16,12 @@ app.get("/restaurants/:id", async (req, res) => {
   res.json(restaurant);
 });
 
+app.delete("/restaurants/:id", async (req, res) => {
+  let restaurantId = req.params.id;
+  let restaurant = await Restaurant.findByPk(restaurantId);
+  await restaurant.destroy();
+  let allRestaurants = await Restaurant.findAll();
+  res.json(allRestaurants);
+});
+
 module.exports = app;
